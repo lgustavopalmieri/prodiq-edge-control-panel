@@ -1,6 +1,6 @@
 "use client";
 import { Flex, Menu } from "antd";
-import { ControlOutlined, HistoryOutlined } from "@ant-design/icons";
+import { SlidersVertical, History } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -29,12 +29,12 @@ const SideMenu: React.FunctionComponent<ISideMenuProps> = ({
         items={[
           {
             key: "/",
-            icon: <ControlOutlined />,
+            icon: <SlidersVertical />,
             label: <Link href="/">Control Panel</Link>,
           },
           {
             key: "/historical",
-            icon: <HistoryOutlined />,
+            icon: <History />,
             label: <Link href="/historical">Historical Data</Link>,
           },
         ]}

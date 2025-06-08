@@ -1,6 +1,6 @@
 "use client";
 
-import { AppstoreOutlined } from "@ant-design/icons";
+import { Activity } from "lucide-react";
 
 interface ILogoProps {
   collapsed: boolean;
@@ -24,9 +24,7 @@ const Logo: React.FunctionComponent<ILogoProps> = ({
         flexShrink: 0,
       }}
     >
-      <AppstoreOutlined
-        style={{ fontSize: 24, marginRight: collapsed ? 0 : 8 }}
-      />
+      <Activity style={{ fontSize: 24, marginRight: collapsed ? 0 : 8 }} />
       {!collapsed && "ProdIQ"}
     </div>
   );
