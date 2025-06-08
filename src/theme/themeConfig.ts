@@ -3,30 +3,33 @@ import { ThemeConfig, theme } from "antd";
 export const themeConfig: ThemeConfig = {
   algorithm: theme.darkAlgorithm,
   token: {
-    colorPrimary: "#4F9D69", // Verde industrial (controle)
-    colorBgBase: "#141414", // Fundo escuro neutro
-    colorTextBase: "#E5E5E5", // Texto claro
-    colorBorderSecondary: "#303030",
+    colorPrimary: "#13C2C2",
+    colorBgBase: "#18181B",
+    colorTextBase: "#E4E4E7",
+    colorBorderSecondary: "#3F3F46",
     borderRadius: 6,
-    // colorBgContainer: "red",
+    fontSize: 15,
   },
   components: {
     Layout: {
-      headerBg: "#1F1F1F",
-      siderBg: "#1A1A1A",
+      headerBg: "#1F1F22",
+      siderBg: "#1A1A1D",
     },
     Menu: {
-      itemSelectedColor: "#4F9D69",
-      itemHoverColor: "#4F9D69",
-      itemColor: "#CCCCCC",
+      itemColor: "#A1A1AA",
+      itemHoverColor: "#36CFC9",
+      itemSelectedColor: "#5CDBD3",
+      itemBg: "#1F1F22",
     },
-
     Button: {
-      // defaultColor: "#E5E5E5",
-      // defaultBg: "#333333",
-      // defaultBorderColor: "#4F9D69",
-      // primaryColor: "#fff",
-      // primaryBg: "#4F9D69",
+      defaultBg: "#1F1F22",
+      defaultColor: "#E4E4E7",
+      defaultHoverBg: "#13C2C2",
+      defaultHoverColor: "#FFF",
+    },
+    Card: {
+      headerBg: "#1F1F22",
+      colorBgContainer: "#1F1F22",
     },
   },
 };
