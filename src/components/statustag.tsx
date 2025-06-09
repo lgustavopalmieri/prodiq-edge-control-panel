@@ -15,9 +15,11 @@ const StatusTag: React.FunctionComponent<IStatusTagProps> = ({
     <Flex>
       <Tag
         style={{
-          padding: "0.3rem 4rem",
+          minWidth: "6rem",
+          padding: "0.3rem 2rem",
           fontSize: "1rem",
           fontWeight: "bold",
+          textAlign: "center",
         }}
         color={color}
       >

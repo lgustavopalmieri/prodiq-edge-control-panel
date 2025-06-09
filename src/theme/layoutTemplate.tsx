@@ -38,7 +38,7 @@ const LayoutTemplate: React.FunctionComponent<ILayoutTemplateProps> = ({
         <HeaderLayout
           collapsed={collapsed}
           setCollapsed={setCollapsed}
-          colorBgContainer={""}
+          colorBgContainer={colorBgContainer}
         />
         <Content
           style={{
@@ -46,6 +46,8 @@ const LayoutTemplate: React.FunctionComponent<ILayoutTemplateProps> = ({
             padding: "1.5rem ",
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
+            height: "100%",
+            overflowY: "auto",
           }}
         >
           {children}

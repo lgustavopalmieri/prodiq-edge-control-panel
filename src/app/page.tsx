@@ -1,28 +1,14 @@
 "use client";
 
 import MachineInfo from "@/features/controlpanel/machineinfo";
+import ProductionSteps from "@/features/productionsteps/productionsteps";
 import { Divider, Flex, Steps } from "antd";
 
 interface IHomeProps {}
 
-const stepsItems = [
-  {
-    title: "Selecionar Ordem",
-  },
-  {
-    title: "Confirmar Setup",
-  },
-  {
-    title: "Produzindo",
-  },
-  {
-    title: "Finalizar",
-  },
-];
-
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
   return (
-    <Flex vertical style={{ height: "100%" }}>
+    <Flex vertical justify="space-between" style={{ width: "100%", flex: 1 }}>
       <MachineInfo
         machineName="KUKA KR QUANTEC Series"
         operation="Spot Welding"
@@ -32,7 +18,9 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
         statusColor="cyan"
       />
       <Divider />
-      <Steps current={3} items={stepsItems} />
+      <Flex style={{ height: "100%" }}>
+        <ProductionSteps currentStep={0} />
+      </Flex>
     </Flex>
   );
 };

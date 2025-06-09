@@ -13,7 +13,10 @@ export const SectionHeader: React.FunctionComponent<SectionHeaderProps> = ({
   title,
 }) => (
   <Flex gap="1rem" align="center">
-    {icon}
+    <Title level={4} style={{ margin: 0 }}>
+      {icon}
+    </Title>
+
     <Title level={4} style={{ margin: 0 }}>
       {title}
     </Title>
