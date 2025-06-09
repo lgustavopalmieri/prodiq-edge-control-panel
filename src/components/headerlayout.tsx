@@ -3,7 +3,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Button, Layout } from "antd";
-import MachineInfo from "@/features/controlpanel/machineinfo";
 
 interface IHeaderLayoutProps {
   collapsed: boolean;

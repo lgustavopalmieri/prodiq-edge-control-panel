@@ -1,35 +1,17 @@
 "use client";
 
 import { Button, Card, Tag, Typography } from "antd";
-
-type ProductionOrder = {
-  id: number;
-  orderCode: string;
-  operation: string;
-  quantity: number;
-  deadline: string;
-  priority: "Low" | "Medium" | "High";
-};
+import { getPriorityColor } from "./getPriorityColor";
+import { ProductionOrderType } from "./types";
 
 interface IOrderCardProps {
-  order: ProductionOrder;
+  order: ProductionOrderType;
+  onSelect: (order: ProductionOrderType) => void;
 }
-
-const getPriorityColor = (priority: string) => {
-  switch (priority) {
-    case "High":
-      return "red";
-    case "Medium":
-      return "gold";
-    case "Low":
-      return "green";
-    default:
-      return "default";
-  }
-};
 
 const OrderCard: React.FunctionComponent<IOrderCardProps> = ({
   order,
+  onSelect,
 }: IOrderCardProps) => {
   return (
     <Card
@@ -37,7 +19,16 @@ const OrderCard: React.FunctionComponent<IOrderCardProps> = ({
       title={order.orderCode}
       style={{ width: 300, minHeight: 200 }}
       actions={[
-        <Button type="primary" block size="large">
+        <Button
+          type="primary"
+          block
+          size="large"
+          onClick={() => onSelect(order)}
+          style={{
+            boxShadow: "0 0 0.2rem #13C2C2",
+            transition: "all 0.2s ease-in-out",
+          }}
+        >
           Select
         </Button>,
       ]}
@@ -52,7 +43,14 @@ const OrderCard: React.FunctionComponent<IOrderCardProps> = ({
         Deadline: <strong>{order.deadline}</strong>
       </Typography.Text>
       <br />
-      <Tag color={getPriorityColor(order.priority)}>
+      <Tag
+        style={{
+          marginTop: "0.4rem",
+          fontWeight: "bold",
+          padding: "0rem 1rem",
+        }}
+        color={getPriorityColor(order.priority)}
+      >
         {order.priority} Priority
       </Tag>
     </Card>

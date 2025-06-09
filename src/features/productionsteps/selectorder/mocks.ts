@@ -1,4 +1,6 @@
-export const mockOrders = [
+import { ProductionOrderType } from "./types";
+
+export const mockOrders: ProductionOrderType[] = [
   {
     id: 1,
     orderCode: "ORD-001",

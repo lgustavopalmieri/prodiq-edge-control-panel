@@ -1,26 +1,28 @@
 "use client";
 
-import { useState } from "react";
 import { Flex, Input, Pagination } from "antd";
 import OrderCard from "./ordercard";
-import { mockOrders } from "./mocks";
+import { usePaginatedOrders } from "./usePaginatedOrders";
 
 const SelectOrderStep = () => {
-  const [search, setSearch] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
-
-  const filteredOrders = mockOrders.filter((order) =>
-    order.orderCode.toLowerCase().includes(search.toLowerCase())
-  );
-
-  const paginatedOrders = filteredOrders.slice(
-    (currentPage - 1) * pageSize,
-    currentPage * pageSize
-  );
+  const {
+    search,
+    setSearch,
+    currentPage,
+    setCurrentPage,
+    pageSize,
+    setPageSize,
+    total,
+    paginatedOrders,
+  } = usePaginatedOrders({ pageSize: 6 });
 
   return (
-    <Flex vertical justify="center" gap="1rem" style={{ width: "100%" }}>
+    <Flex
+      vertical
+      justify="center"
+      gap="1rem"
+      style={{ width: "100%", backgroundColor: "transparent" }}
+    >
       <Flex justify="space-between" align="center">
         <Input
           placeholder="Search order code..."
@@ -37,6 +39,9 @@ const SelectOrderStep = () => {
         {paginatedOrders.map((order) => (
           <OrderCard
             key={order.id}
+            onSelect={(order) => {
+              console.log("Selected order:", order);
+            }}
             order={{
               id: order.id,
               orderCode: order.orderCode,
@@ -51,7 +56,7 @@ const SelectOrderStep = () => {
 
       <Pagination
         current={currentPage}
-        total={filteredOrders.length}
+        total={total}
         pageSize={pageSize}
         showSizeChanger={true}
         pageSizeOptions={["6", "12", "20"]}
