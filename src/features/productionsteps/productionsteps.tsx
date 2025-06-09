@@ -3,8 +3,8 @@
 import { Steps, Flex } from "antd";
 import type { StepProps } from "antd/es/steps";
 import React from "react";
+import SelectOrderStep from "./selectorder/selectorderstep";
 
-const SelectOrderStep = () => <div>🛠 Select production order form...</div>;
 const ConfirmSetupStep = () => <div>🔧 Confirm machine setup...</div>;
 const ProducingStep = () => <div>⚙️ Operation in progress...</div>;
 const AdjustParametersStep = () => (
@@ -23,11 +23,11 @@ const stepContentMap: Record<number, JSX.Element> = {
 };
 
 const stepTitles = [
-  "Selecionar Ordem",
-  "Confirmar Setup",
-  "Produzindo",
-  "Ajustar Parâmetros?",
-  "Finalizar",
+  "Select Order",
+  "Confirm Setup",
+  "Producing",
+  "Adjust Parameters?",
+  "Finish",
 ];
 
 interface IProductionStepsProps {
@@ -45,15 +45,18 @@ const ProductionSteps: React.FunctionComponent<IProductionStepsProps> = ({
   });
 
   return (
-    <Flex vertical style={{ width: "100%", flex: 1, overflow: "auto" }}>
+    <Flex
+      gap="1rem"
+      vertical
+      style={{ width: "100%", flex: 1, overflow: "auto" }}
+    >
       <Steps size="small" current={currentStep} items={stepsItems} />
       <Flex
         style={{
           flex: 1,
-          marginTop: "1rem",
           padding: "1rem",
           backgroundColor: "#1a1a1a",
-          borderRadius: "8px",
+          borderRadius: "0.5rem",
           overflow: "auto",
         }}
       >
