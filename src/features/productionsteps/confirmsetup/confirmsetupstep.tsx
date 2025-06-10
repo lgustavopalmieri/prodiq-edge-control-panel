@@ -1,15 +1,7 @@
 "use client";
 
 import React from "react";
-import {
-  Card,
-  Descriptions,
-  Divider,
-  Table,
-  Typography,
-  Button,
-  Flex,
-} from "antd";
+import { Card, Divider, Typography, Flex } from "antd";
 import {
   FileTextOutlined,
   SlidersOutlined,
@@ -20,8 +12,12 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { ConfirmSetupType } from "./types";
-import { Controller } from "react-hook-form";
-import { InputNumber } from "antd";
+import ToolsTable from "./toolstable";
+import SetupInfoTitles from "./setupinfotitles";
+import OrderDescription from "./oderdescription";
+import AdjustableParameters from "./adjustableparamameters";
+import MaterialsTable from "./materialstable";
+import SetupButton from "./setupbutton";
 
 interface ConfirmSetupStepProps {
   data: ConfirmSetupType;
@@ -67,144 +63,56 @@ const ConfirmSetupStep: React.FC<ConfirmSetupStepProps> = ({
       <Flex vertical gap="1rem" style={{ width: "100%" }}>
         <Card
           title={
-            <Flex gap="0.5rem" align="center">
-              <FileTextOutlined style={{ color: "#13C2C2" }} />
-              Order: {data?.order_code}
-            </Flex>
+            <SetupInfoTitles
+              icon={<FileTextOutlined />}
+              text={`Order: ${data?.order_code}`}
+            />
           }
         >
-          <Descriptions size="small" column={2}>
-            <Descriptions.Item label="Product">
-              {data?.product.name}
-            </Descriptions.Item>
-            <Descriptions.Item label="Operation Code">
-              {data?.operation_code}
-            </Descriptions.Item>
-            <Descriptions.Item label="Total Order Quantity">
-              {data?.total_order_quantity}
-            </Descriptions.Item>
-            <Descriptions.Item label="Cycle Type">
-              {data?.cycle_type}
-            </Descriptions.Item>
-            <Descriptions.Item label="Dispatch Strategy">
-              {data?.dispatch_strategy}
-            </Descriptions.Item>
-            <Descriptions.Item label="Dispatched At">
-              {new Date(data?.dispatched_at).toLocaleString()}
-            </Descriptions.Item>
-          </Descriptions>
+          <OrderDescription data={data} />
 
           <Divider />
 
           <Typography.Title level={5}>
-            <Flex gap="0.5rem" align="center">
-              <SlidersOutlined style={{ color: "#13C2C2" }} />
-              Adjustable Parameters
-            </Flex>
+            <SetupInfoTitles
+              icon={<SlidersOutlined />}
+              text="Adjustable Parameters"
+            />
           </Typography.Title>
 
-          <Flex gap="2rem" wrap>
-            <Controller
-              name="quantity"
-              control={control}
-              render={({ field }) => (
-                <Flex gap="0.5rem" align="center">
-                  <label>Quantity to Produce</label>
-                  <InputNumber
-                    {...field}
-                    min={1}
-                    max={data?.total_order_quantity}
-                  />
-                </Flex>
-              )}
-            />
-
-            <Controller
-              name="expected_cycle_time_sec"
-              control={control}
-              render={({ field }) => (
-                <Flex gap="0.5rem" align="center">
-                  <label>Expected Cycle Time (sec)</label>
-                  <InputNumber {...field} min={1} />
-                </Flex>
-              )}
-            />
-
-            <Controller
-              name="standard_quantity_per_cycle"
-              control={control}
-              render={({ field }) => (
-                <Flex gap="0.5rem" align="center">
-                  <label>Standard Qty / Cycle</label>
-                  <InputNumber {...field} min={1} />
-                </Flex>
-              )}
-            />
-          </Flex>
-        </Card>
-
-        <Card
-          title={
-            <Flex gap="0.5rem" align="center">
-              <AppstoreOutlined style={{ color: "#13C2C2" }} />
-              Materials Required
-            </Flex>
-          }
-        >
-          <Table
-            dataSource={data?.required_setup.materials}
-            pagination={false}
-            rowKey="material_code"
-            columns={[
-              { title: "Material Code", dataIndex: "material_code" },
-              { title: "Name", dataIndex: "name" },
-              { title: "Quantity", dataIndex: "quantity" },
-              { title: "Unit", dataIndex: "unit" },
-            ]}
+          <AdjustableParameters
+            control={control}
+            maxQuantityToProduce={data?.total_order_quantity}
           />
         </Card>
 
         <Card
           title={
-            <Flex gap="0.5rem" align="center">
-              <ToolOutlined style={{ color: "#13C2C2" }} />
-              Tools Required
-            </Flex>
+            <SetupInfoTitles
+              icon={<AppstoreOutlined />}
+              text="Materials Required"
+            />
           }
         >
-          <Table
-            dataSource={data?.required_setup.tools}
-            pagination={false}
-            rowKey="tool_code"
-            columns={[
-              { title: "Tool Code", dataIndex: "tool_code" },
-              { title: "Description", dataIndex: "description" },
-            ]}
-          />
+          <MaterialsTable materialsData={data?.required_setup.materials} />
+        </Card>
+
+        <Card
+          title={
+            <SetupInfoTitles icon={<ToolOutlined />} text="Tools Required" />
+          }
+        >
+          <ToolsTable toolsData={data?.required_setup.tools} />
         </Card>
 
         <Flex justify="space-between" gap="2rem">
-          <Button
-            type="default"
-            block
-            size="large"
-            style={{ fontWeight: "bold" }}
+          <SetupButton
+            type="button"
+            color="default"
+            text="Back"
             onClick={onAbort}
-          >
-            Back
-          </Button>
-          <Button
-            htmlType="submit"
-            type="primary"
-            block
-            size="large"
-            style={{
-              boxShadow: "0 0 0.2rem #13C2C2",
-              transition: "all 0.2s ease-in-out",
-            }}
-          >
-            Confirm Setup
-          </Button>
+          />
+          <SetupButton type="submit" color="primary" text="Confirm Setup" />
         </Flex>
       </Flex>
     </form>
