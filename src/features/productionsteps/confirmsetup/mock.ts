@@ -1,4 +1,6 @@
-export const confirmMock = {
+import { OrderExecutionType } from "./types";
+
+export const confirmMock: OrderExecutionType = {
   step_number: 1,
   operation_id: "op-STAMP-PNL",
   operation_code: "STAMP-PNL",

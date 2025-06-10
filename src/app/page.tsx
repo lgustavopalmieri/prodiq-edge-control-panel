@@ -2,7 +2,7 @@
 
 import MachineInfo from "@/features/controlpanel/machineinfo";
 import ProductionSteps from "@/features/productionsteps/productionsteps";
-import { Divider, Flex, Steps } from "antd";
+import { Divider, Flex } from "antd";
 
 interface IHomeProps {}
 
@@ -19,7 +19,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
       />
       <Divider />
       <Flex style={{ height: "100%" }}>
-        <ProductionSteps currentStep={1} />
+        <ProductionSteps currentStep={0} />
       </Flex>
     </Flex>
   );

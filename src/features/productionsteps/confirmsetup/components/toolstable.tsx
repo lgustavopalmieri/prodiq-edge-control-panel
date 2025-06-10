@@ -1,5 +1,5 @@
 import { Table } from "antd";
-import { ToolsType } from "./types";
+import { ToolsType } from "../types";
 
 interface IToolsTableProps {
   toolsData: ToolsType[];

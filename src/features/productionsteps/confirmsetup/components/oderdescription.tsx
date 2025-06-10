@@ -1,6 +1,6 @@
 import { Descriptions } from "antd";
 import * as React from "react";
-import { ConfirmSetupType } from "./types";
+import { ConfirmSetupType } from "../types";
 
 interface IOrderDescriptionProps {
   data: ConfirmSetupType;

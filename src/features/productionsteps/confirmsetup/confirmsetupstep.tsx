@@ -12,12 +12,12 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { ConfirmSetupType } from "./types";
-import ToolsTable from "./toolstable";
-import SetupInfoTitles from "./setupinfotitles";
-import OrderDescription from "./oderdescription";
-import AdjustableParameters from "./adjustableparamameters";
-import MaterialsTable from "./materialstable";
-import SetupButton from "./setupbutton";
+import ToolsTable from "./components/toolstable";
+import SetupInfoTitles from "./components/setupinfotitles";
+import OrderDescription from "./components/oderdescription";
+import AdjustableParameters from "./components/adjustableparamameters";
+import MaterialsTable from "./components/materialstable";
+import SetupButton from "./components/setupbutton";
 
 interface ConfirmSetupStepProps {
   data: ConfirmSetupType;

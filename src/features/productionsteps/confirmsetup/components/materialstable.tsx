@@ -1,5 +1,5 @@
 import { Table } from "antd";
-import { MaterialsType } from "./types";
+import { MaterialsType } from "../types";
 
 interface IMaterialsTableProps {
   materialsData: MaterialsType[];
