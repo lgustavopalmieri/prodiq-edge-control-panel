@@ -19,7 +19,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
       />
       <Divider />
       <Flex style={{ height: "100%" }}>
-        <ProductionSteps currentStep={0} />
+        <ProductionSteps currentStep={1} />
       </Flex>
     </Flex>
   );

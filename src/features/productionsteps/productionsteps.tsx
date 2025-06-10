@@ -4,8 +4,10 @@ import { Steps, Flex } from "antd";
 import type { StepProps } from "antd/es/steps";
 import React from "react";
 import SelectOrderStep from "./selectorder/selectorderstep";
+import ConfirmSetupStep from "./confirmsetup/confirmsetupstep";
+import { ConfirmSetupType } from "./confirmsetup/types";
+import { confirmMock } from "./confirmsetup/mock";
 
-const ConfirmSetupStep = () => <div>🔧 Confirm machine setup...</div>;
 const ProducingStep = () => <div>⚙️ Operation in progress...</div>;
 const AdjustParametersStep = () => (
   <div>🧪 Adjust or justify parameters...</div>
@@ -16,7 +18,32 @@ const FinishStep = () => (
 
 const stepContentMap: Record<number, JSX.Element> = {
   0: <SelectOrderStep />,
-  1: <ConfirmSetupStep />,
+  1: (
+    <ConfirmSetupStep
+      data={{
+        order_code: confirmMock.order_code,
+        operation_code: confirmMock.operation_code,
+        product: {
+          product_id: confirmMock.product.product_id,
+          sku: confirmMock.product.sku,
+          name: confirmMock.product.name,
+        },
+        total_order_quantity: confirmMock.total_order_quantity,
+        quantity: confirmMock.quantity,
+        dispatched_at: confirmMock.dispatched_at,
+        expected_cycle_time_sec: confirmMock.expected_cycle_time_sec,
+        standard_quantity_per_cycle: confirmMock.standard_quantity_per_cycle,
+        cycle_type: confirmMock.cycle_type as any,
+        required_setup: {
+          materials: [...confirmMock.required_setup.materials],
+          tools: [...confirmMock.required_setup.tools],
+        },
+      }}
+      onConfirm={function (updated: ConfirmSetupType): void {
+        throw new Error("Function not implemented.");
+      }}
+    />
+  ),
   2: <ProducingStep />,
   3: <AdjustParametersStep />,
   4: <FinishStep />,
