@@ -30,6 +30,7 @@ const stepContentMap: Record<number, JSX.Element> = {
         },
         total_order_quantity: confirmMock.total_order_quantity,
         quantity: confirmMock.quantity,
+        dispatch_strategy: confirmMock.dispatch_strategy as any,
         dispatched_at: confirmMock.dispatched_at,
         expected_cycle_time_sec: confirmMock.expected_cycle_time_sec,
         standard_quantity_per_cycle: confirmMock.standard_quantity_per_cycle,
@@ -39,7 +40,8 @@ const stepContentMap: Record<number, JSX.Element> = {
           tools: [...confirmMock.required_setup.tools],
         },
       }}
-      onConfirm={function (updated: ConfirmSetupType): void {
+      onConfirm={(value) => console.log(value)}
+      onAbort={function (): void {
         throw new Error("Function not implemented.");
       }}
     />

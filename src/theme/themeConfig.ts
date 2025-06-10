@@ -27,7 +27,7 @@ export const themeConfig: ThemeConfig = {
       algorithm: true,
       defaultBg: "#1F1F22",
       defaultColor: "#E4E4E7",
-      defaultHoverBg: "#13C2C2",
+      defaultHoverBg: "#595959",
       defaultHoverColor: "#FFF",
 
       colorPrimaryHover: "#006d75",

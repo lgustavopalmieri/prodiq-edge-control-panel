@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+
 import {
   Card,
   Descriptions,
@@ -11,16 +12,24 @@ import {
   Button,
   Flex,
 } from "antd";
+import {
+  FileTextOutlined,
+  SlidersOutlined,
+  AppstoreOutlined,
+  ToolOutlined,
+} from "@ant-design/icons";
 import type { ConfirmSetupType } from "./types";
 
 interface ConfirmSetupStepProps {
   data: ConfirmSetupType;
   onConfirm: (updated: ConfirmSetupType) => void;
+  onAbort: () => void;
 }
 
 const ConfirmSetupStep: React.FC<ConfirmSetupStepProps> = ({
   data,
   onConfirm,
+  onAbort,
 }) => {
   const [quantity, setQuantity] = useState(data?.quantity);
   const [expectedCycleTime, setExpectedCycleTime] = useState(
@@ -32,7 +41,14 @@ const ConfirmSetupStep: React.FC<ConfirmSetupStepProps> = ({
 
   return (
     <Flex vertical gap="1rem" style={{ width: "100%" }}>
-      <Card title={`Order: ${data?.order_code}`} bordered={false}>
+      <Card
+        title={
+          <Flex gap="0.5rem" align="center">
+            <FileTextOutlined style={{ color: "#13C2C2" }} />
+            Order: {data?.order_code}
+          </Flex>
+        }
+      >
         <Descriptions size="small" column={2}>
           <Descriptions.Item label="Product">
             {data?.product.name}
@@ -46,6 +62,9 @@ const ConfirmSetupStep: React.FC<ConfirmSetupStepProps> = ({
           <Descriptions.Item label="Cycle Type">
             {data?.cycle_type}
           </Descriptions.Item>
+          <Descriptions.Item label="Dispatch Strategy">
+            {data?.dispatch_strategy}
+          </Descriptions.Item>
           <Descriptions.Item label="Dispatched At">
             {new Date(data?.dispatched_at).toLocaleString()}
           </Descriptions.Item>
@@ -53,10 +72,15 @@ const ConfirmSetupStep: React.FC<ConfirmSetupStepProps> = ({
 
         <Divider />
 
-        <Typography.Title level={5}>Adjustable Parameters</Typography.Title>
+        <Typography.Title level={5}>
+          <Flex gap="0.5rem" align="center">
+            <SlidersOutlined style={{ color: "#13C2C2" }} />
+            Adjustable Parameters
+          </Flex>
+        </Typography.Title>
 
         <Flex gap="2rem" wrap>
-          <div>
+          <Flex gap="0.5rem" align="center">
             <label>Quantity to Produce</label>
             <InputNumber
               min={1}
@@ -64,29 +88,36 @@ const ConfirmSetupStep: React.FC<ConfirmSetupStepProps> = ({
               value={quantity}
               onChange={(val) => setQuantity(val ?? 0)}
             />
-          </div>
+          </Flex>
 
-          <div>
+          <Flex gap="0.5rem" align="center">
             <label>Expected Cycle Time (sec)</label>
             <InputNumber
               min={1}
               value={expectedCycleTime}
               onChange={(val) => setExpectedCycleTime(val ?? 0)}
             />
-          </div>
+          </Flex>
 
-          <div>
+          <Flex gap="0.5rem" align="center">
             <label>Standard Qty / Cycle</label>
             <InputNumber
               min={1}
               value={standardPerCycle}
               onChange={(val) => setStandardPerCycle(val ?? 0)}
             />
-          </div>
+          </Flex>
         </Flex>
       </Card>
 
-      <Card title="Materials Required">
+      <Card
+        title={
+          <Flex gap="0.5rem" align="center">
+            <AppstoreOutlined style={{ color: "#13C2C2" }} />
+            Materials Required
+          </Flex>
+        }
+      >
         <Table
           dataSource={data?.required_setup.materials}
           pagination={false}
@@ -100,7 +131,14 @@ const ConfirmSetupStep: React.FC<ConfirmSetupStepProps> = ({
         />
       </Card>
 
-      <Card title="Tools Required">
+      <Card
+        title={
+          <Flex gap="0.5rem" align="center">
+            <ToolOutlined style={{ color: "#13C2C2" }} />
+            Tools Required
+          </Flex>
+        }
+      >
         <Table
           dataSource={data?.required_setup.tools}
           pagination={false}
@@ -112,7 +150,18 @@ const ConfirmSetupStep: React.FC<ConfirmSetupStepProps> = ({
         />
       </Card>
 
-      <Flex justify="end">
+      <Flex justify="space-between" gap="2rem">
+        <Button
+          type="default"
+          block
+          size="large"
+          style={{
+            fontWeight: "bold",
+          }}
+          onClick={onAbort}
+        >
+          Back
+        </Button>
         <Button
           type="primary"
           block

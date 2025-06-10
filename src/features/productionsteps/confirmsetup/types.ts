@@ -66,6 +66,7 @@ export type ConfirmSetupType = {
   product: ProductReferenceType;
   total_order_quantity: number;
   quantity: number;
+  dispatch_strategy: DispatchStrategyType;
   dispatched_at: string;
   expected_cycle_time_sec: number;
   standard_quantity_per_cycle: number;
