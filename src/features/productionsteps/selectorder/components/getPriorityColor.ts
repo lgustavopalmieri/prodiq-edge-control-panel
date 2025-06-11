@@ -1,10 +1,12 @@
-export const getPriorityColor = (priority: string) => {
+import { OrderPriorityType } from "../types";
+
+export const getPriorityColor = (priority: OrderPriorityType) => {
   switch (priority) {
-    case "High":
+    case "high":
       return "red";
-    case "Medium":
+    case "medium":
       return "gold";
-    case "Low":
+    case "low":
       return "green";
     default:
       return "default";

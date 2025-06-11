@@ -1,4 +1,4 @@
-export type OrderPriorityType = "Low" | "Medium" | "High";
+export type OrderPriorityType = "low" | "medium" | "high" | "critical";
 
 export type ProductionOrderType = {
   id: number | string;

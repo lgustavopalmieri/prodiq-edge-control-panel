@@ -7,7 +7,7 @@ export const mockOrders: ProductionOrderType[] = [
     operation: "Spot Welding",
     quantity: 120,
     deadline: "2025-06-15",
-    priority: "High",
+    priority: "high",
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ export const mockOrders: ProductionOrderType[] = [
     operation: "Riveting",
     quantity: 80,
     deadline: "2025-06-16",
-    priority: "Medium",
+    priority: "medium",
   },
   {
     id: 3,
@@ -23,7 +23,7 @@ export const mockOrders: ProductionOrderType[] = [
     operation: "Painting",
     quantity: 200,
     deadline: "2025-06-14",
-    priority: "Low",
+    priority: "low",
   },
   {
     id: 4,
@@ -31,7 +31,7 @@ export const mockOrders: ProductionOrderType[] = [
     operation: "Spot Welding",
     quantity: 120,
     deadline: "2025-06-15",
-    priority: "High",
+    priority: "high",
   },
   {
     id: 5,
@@ -39,7 +39,7 @@ export const mockOrders: ProductionOrderType[] = [
     operation: "Riveting",
     quantity: 80,
     deadline: "2025-06-16",
-    priority: "Medium",
+    priority: "medium",
   },
   {
     id: 6,
@@ -47,7 +47,7 @@ export const mockOrders: ProductionOrderType[] = [
     operation: "Painting",
     quantity: 200,
     deadline: "2025-06-14",
-    priority: "Low",
+    priority: "low",
   },
   {
     id: 7,
@@ -55,6 +55,6 @@ export const mockOrders: ProductionOrderType[] = [
     operation: "Painting",
     quantity: 200,
     deadline: "2025-06-14",
-    priority: "Low",
+    priority: "low",
   },
 ];

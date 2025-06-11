@@ -8,7 +8,7 @@ export type ProductionOrder = {
   operation: string;
   quantity: number;
   deadline: string;
-  priority: "Low" | "Medium" | "High";
+  priority: "low" | "medium" | "high" | "Critical";
 };
 
 interface UsePaginatedOrdersOptions {
@@ -18,7 +18,7 @@ interface UsePaginatedOrdersOptions {
 
 export function usePaginatedOrders({
   machineId,
-  pageSize: initialPageSize = 1,
+  pageSize: initialPageSize = 6,
 }: UsePaginatedOrdersOptions) {
   const [orders, setOrders] = useState<ProductionOrder[]>([]);
   const [search, setSearch] = useState("");
@@ -55,7 +55,7 @@ export function usePaginatedOrders({
             operation: item.OperationName,
             quantity: item.Quantity,
             deadline: item.DispatchedAt,
-            priority: "Medium",
+            priority: item.OrderPriority,
           }));
 
           setOrders(mapped);

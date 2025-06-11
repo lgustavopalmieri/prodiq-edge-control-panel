@@ -3,6 +3,7 @@
 import { Flex, Input, Pagination } from "antd";
 import OrderCard from "./components/ordercard";
 import { usePaginatedOrders } from "./hooks/usePaginatedOrders";
+import { OrderPriorityType } from "./types";
 
 const SelectOrderStep = () => {
   const {
@@ -48,7 +49,7 @@ const SelectOrderStep = () => {
               operation: order.operation,
               quantity: order.quantity,
               deadline: order.deadline,
-              priority: order.priority as "Low" | "Medium" | "High",
+              priority: order.priority as OrderPriorityType,
             }}
           />
         ))}
