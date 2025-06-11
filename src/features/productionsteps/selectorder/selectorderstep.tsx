@@ -1,8 +1,8 @@
 "use client";
 
 import { Flex, Input, Pagination } from "antd";
-import OrderCard from "./ordercard";
-import { usePaginatedOrders } from "./usePaginatedOrders";
+import OrderCard from "./components/ordercard";
+import { usePaginatedOrders } from "./hooks/usePaginatedOrders";
 
 const SelectOrderStep = () => {
   const {
@@ -14,7 +14,7 @@ const SelectOrderStep = () => {
     setPageSize,
     total,
     paginatedOrders,
-  } = usePaginatedOrders({ pageSize: 6 });
+  } = usePaginatedOrders({ machineId: "press-01" });
 
   return (
     <Flex
@@ -43,7 +43,7 @@ const SelectOrderStep = () => {
               console.log("Selected order:", order);
             }}
             order={{
-              id: order.id,
+              id: String(order.id),
               orderCode: order.orderCode,
               operation: order.operation,
               quantity: order.quantity,

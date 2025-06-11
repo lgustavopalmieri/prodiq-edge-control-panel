@@ -2,7 +2,7 @@
 
 import { Button, Card, Tag, Typography } from "antd";
 import { getPriorityColor } from "./getPriorityColor";
-import { ProductionOrderType } from "./types";
+import { ProductionOrderType } from "../types";
 
 interface IOrderCardProps {
   order: ProductionOrderType;

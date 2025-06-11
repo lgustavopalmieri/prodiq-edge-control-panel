@@ -1,7 +1,7 @@
 export type OrderPriorityType = "Low" | "Medium" | "High";
 
 export type ProductionOrderType = {
-  id: number;
+  id: number | string;
   orderCode: string;
   operation: string;
   quantity: number;
