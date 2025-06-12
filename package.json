@@ -12,12 +12,14 @@
     "@ant-design/nextjs-registry": "^1.0.2",
     "@hookform/resolvers": "^5.1.1",
     "antd": "^5.25.4",
+    "axios": "^1.9.0",
     "lucide-react": "^0.513.0",
     "next": "15.3.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.57.0",
-    "zod": "^3.25.57"
+    "zod": "^3.25.57",
+    "zustand": "^5.0.5"
   },
   "overrides": {
     "react": "18.2.0",

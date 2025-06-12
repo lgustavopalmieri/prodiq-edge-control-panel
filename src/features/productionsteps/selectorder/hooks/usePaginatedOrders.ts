@@ -1,6 +1,5 @@
-"use client";
-
-import { useEffect, useMemo, useState } from "react";
+import { usePaginatedFetch } from "@/hooks/usePaginatedFetch";
+import { useMemo, useState } from "react";
 
 export type ProductionOrder = {
   id: string;
@@ -8,7 +7,7 @@ export type ProductionOrder = {
   operation: string;
   quantity: number;
   deadline: string;
-  priority: "low" | "medium" | "high" | "Critical";
+  priority: "low" | "medium" | "high" | "critical";
 };
 
 interface UsePaginatedOrdersOptions {
@@ -18,65 +17,36 @@ interface UsePaginatedOrdersOptions {
 
 export function usePaginatedOrders({
   machineId,
-  pageSize: initialPageSize = 6,
+  pageSize = 1,
 }: UsePaginatedOrdersOptions) {
-  const [orders, setOrders] = useState<ProductionOrder[]>([]);
   const [search, setSearch] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(initialPageSize);
-  const [total, setTotal] = useState(0);
-  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchOrders = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch(
-          `http://localhost:8080/order-execution/available?machine_id=${machineId}&page=${currentPage}&page_size=${pageSize}`,
-          {
-            method: "GET",
-            headers: {
-              "X-Tenant-ID": "vw-anchieta",
-              "Content-Type": "application/json",
-            },
-          }
-        );
+  const { data, total, loading, currentPage, setCurrentPage, setPageSize } =
+    usePaginatedFetch<ProductionOrder>({
+      url: "http://localhost:8080/order-execution/available",
+      pageSize,
+      params: {
+        machine_id: machineId,
+      },
+      mapData: (item) => ({
+        id: item.OrderExecutionID,
+        orderCode: item.OrderCode,
+        operation: item.OperationName,
+        quantity: item.Quantity,
+        deadline: item.DispatchedAt,
+        priority: item.OrderPriority,
+      }),
+      onError: (error) => {
+        console.error("Failed to fetch orders:", error);
+      },
+    });
 
-        if (!res.ok) {
-          throw new Error(`HTTP ${res.status}`);
-        }
-
-        const json = await res.json();
-
-        if (json.success) {
-          const mapped = json.data.map((item: any) => ({
-            id: item.OrderExecutionID,
-            orderCode: item.OrderCode,
-            operation: item.OperationName,
-            quantity: item.Quantity,
-            deadline: item.DispatchedAt,
-            priority: item.OrderPriority,
-          }));
-
-          setOrders(mapped);
-          setTotal(json.pagination.total_items);
-        }
-      } catch (err) {
-        console.error("Failed to fetch orders:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchOrders();
-  }, [machineId, currentPage, pageSize]);
-
-  const filteredOrders = useMemo(
+  const filtered = useMemo(
     () =>
-      orders.filter((order) =>
+      data.filter((order) =>
         order.orderCode.toLowerCase().includes(search.toLowerCase())
       ),
-    [orders, search]
+    [data, search]
   );
 
   return {
@@ -87,7 +57,7 @@ export function usePaginatedOrders({
     pageSize,
     setPageSize,
     total,
-    paginatedOrders: filteredOrders,
+    paginatedOrders: filtered,
     loading,
   };
 }
