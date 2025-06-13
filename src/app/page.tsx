@@ -1,12 +1,21 @@
 "use client";
 
+import { useAuthStore } from "@/features/auth/auth-store";
 import MachineInfo from "@/features/controlpanel/machineinfo";
 import ProductionSteps from "@/features/productionsteps/productionsteps";
 import { Divider, Flex } from "antd";
+import { useEffect } from "react";
 
 interface IHomeProps {}
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
+  const setToken = useAuthStore((state) => state.setToken);
+
+  useEffect(() => {
+    const fakeToken = "fake-jwt-token";
+    setToken(fakeToken);
+  }, [setToken]);
+  
   return (
     <Flex vertical justify="space-between" style={{ width: "100%", flex: 1 }}>
       <MachineInfo

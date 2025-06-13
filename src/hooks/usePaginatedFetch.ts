@@ -3,8 +3,8 @@ import { AxiosRequestConfig } from "axios";
 import api from "@/api/provider";
 
 type PaginationParams = {
-  searchByField?: string;
-  searchValue?: string;
+  searchBy?: string;
+  search?: string;
   orderByField?: string;
   orderDesc?: boolean;
 };
@@ -41,11 +41,11 @@ export function usePaginatedFetch<T>({
           ...params,
           page: currentPage,
           page_size: pageSize,
-          ...(paginationParams.searchByField && {
-            search_by_field: paginationParams.searchByField,
+          ...(paginationParams.searchBy && {
+            search_by: paginationParams.searchBy,
           }),
-          ...(paginationParams.searchValue && {
-            search_value: paginationParams.searchValue,
+          ...(paginationParams.search && {
+            search: paginationParams.search,
           }),
           ...(paginationParams.orderByField && {
             order_by_field: paginationParams.orderByField,

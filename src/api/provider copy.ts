@@ -7,22 +7,17 @@ const api = axios.create({
     "Content-Type": "application/json",
   },
 });
+
 api.interceptors.request.use(
   (config) => {
-    const { token, tenantId } = useAuthStore.getState();
+    const tenantId = "vw-anchieta";
 
     if (tenantId) {
       config.headers["X-Tenant-ID"] = tenantId;
-    } else {
-      console.warn("No tenant ID found!");
     }
-
     // if (token) {
     //   config.headers["Authorization"] = `Bearer ${token}`;
-    // } else {
-    //   console.warn("No token found!");
     // }
-
     return config;
   },
   (error) => {

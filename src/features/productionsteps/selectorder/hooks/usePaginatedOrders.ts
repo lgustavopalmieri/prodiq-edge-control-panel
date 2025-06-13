@@ -1,5 +1,5 @@
 import { usePaginatedFetch } from "@/hooks/usePaginatedFetch";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 export type ProductionOrder = {
   id: string;
@@ -17,9 +17,18 @@ interface UsePaginatedOrdersOptions {
 
 export function usePaginatedOrders({
   machineId,
-  pageSize = 1,
+  pageSize = 6,
 }: UsePaginatedOrdersOptions) {
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [search]);
 
   const { data, total, loading, currentPage, setCurrentPage, setPageSize } =
     usePaginatedFetch<ProductionOrder>({
@@ -27,6 +36,10 @@ export function usePaginatedOrders({
       pageSize,
       params: {
         machine_id: machineId,
+      },
+      paginationParams: {
+        searchBy: "order_code",
+        search: debouncedSearch,
       },
       mapData: (item) => ({
         id: item.OrderExecutionID,
@@ -44,9 +57,9 @@ export function usePaginatedOrders({
   const filtered = useMemo(
     () =>
       data.filter((order) =>
-        order.orderCode.toLowerCase().includes(search.toLowerCase())
+        order.orderCode.toLowerCase().includes(debouncedSearch.toLowerCase())
       ),
-    [data, search]
+    [data, debouncedSearch]
   );
 
   return {
